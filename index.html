@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VeonLine</title>
+  <meta name="description" content="VeonLine — Quality you can trust. Delivered fast." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2f;
+      --muted:#94a3b8;
+      --text:#e5e7eb;
+      --white:#ffffff;
+      --line:rgba(255,255,255,.12);
+      --accent:#3b82f6;
+      --accent2:#f59e0b;
+      --ok:#22c55e;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 20px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(59,130,246,.22), transparent 60%),
+        radial-gradient(900px 600px at 80% 30%, rgba(245,158,11,.18), transparent 55%),
+        radial-gradient(1000px 700px at 50% 100%, rgba(34,197,94,.14), transparent 60%),
+        linear-gradient(180deg, #070b14, var(--bg));
+      line-height:1.5;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px}
+    .nav{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(7,11,20,.55);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 24px;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; font-weight:800;
+      letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: conic-gradient(from 220deg, var(--accent), var(--ok), var(--accent2), var(--accent));
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .menu{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+    .menu a{
+      color: var(--muted);
+      font-weight:600;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .menu a:hover{color:var(--white); background:rgba(255,255,255,.06)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:11px 14px;
+      border-radius:14px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--white);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    }
+    .btn:hover{transform: translateY(-1px); background:rgba(255,255,255,.1)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(59,130,246,.95), rgba(34,197,94,.85));
+      border-color: rgba(255,255,255,.15);
+    }
+    .btn.primary:hover{filter: brightness(1.03)}
+    .btn.small{padding:9px 12px; border-radius:12px; font-weight:800}
+    .hero{
+      padding:44px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: rgba(15,26,47,.72);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-card{padding:28px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(59,130,246,.14);
+      border: 1px solid rgba(59,130,246,.25);
+      color: #cfe3ff;
+      font-weight:700;
+      font-size: 13px;
+    }
+    h1{margin:14px 0 10px; font-size: 44px; line-height:1.08}
+    @media (max-width: 520px){h1{font-size: 36px}}
+    .sub{color:var(--muted); font-size: 16px; max-width: 62ch}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:18px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight:700;
+      font-size: 13px;
+    }
+    .dot{width:8px; height:8px; border-radius:999px; background: var(--ok)}
+    .side-card{
+      padding:18px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .side-top{
+      padding:14px;
+      border-radius: 18px;
+      background:
+        radial-gradient(500px 240px at 15% 20%, rgba(59,130,246,.28), transparent 55%),
+        radial-gradient(360px 220px at 85% 30%, rgba(245,158,11,.2), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.12);
+      min-height: 160px;
+    }
+    .side-title{font-weight:900; font-size: 18px; margin:0 0 6px}
+    .side-text{margin:0; color:var(--muted)}
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){.grid-3{grid-template-columns:1fr}}
+    .mini{
+      padding:14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .mini h3{margin:0 0 6px; font-size: 14px}
+    .mini p{margin:0; color:var(--muted); font-size: 13px}
+    section{padding:22px 0}
+    .section-title{
+      font-size: 24px; margin:0 0 10px;
+    }
+    .section-sub{
+      margin:0 0 18px; color:var(--muted); max-width: 80ch;
+    }
+    .features{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){.features{grid-template-columns:1fr}}
+    .feature{
+      padding:18px;
+    }
+    .icon{
+      width:40px; height:40px; border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(59,130,246,.14);
+      border: 1px solid rgba(59,130,246,.25);
+      margin-bottom:12px;
+      font-weight:900;
+    }
+    .feature h3{margin:0 0 8px; font-size: 16px}
+    .feature p{margin:0; color:var(--muted)}
+    .about{
+      display:grid; grid-template-columns: 1fr 1fr; gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){.about{grid-template-columns:1fr}}
+    .about-card{padding:22px}
+    .list{
+      margin:0; padding-left:18px; color:var(--muted)
+    }
+    .cta{
+      padding:26px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      background:
+        radial-gradient(900px 380px at 30% 30%, rgba(34,197,94,.22), transparent 60%),
+        radial-gradient(700px 320px at 80% 30%, rgba(59,130,246,.22), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+    }
+    @media (max-width: 900px){.cta{flex-direction:column; align-items:flex-start}}
+    footer{
+      padding:22px 0 40px; color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 20px;
+    }
+    .footer-inner{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .muted{color:var(--muted)}
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-weight:700;
+      font-size: 13px;
+    }
+    .divider{height:1px; background: var(--line); margin:12px 0}
+    /* small motion */
+    .btn, .menu a{transition: all .16s ease}
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>VeonLine</div>
+      </div>
+      <nav class="menu" aria-label="Main navigation">
+        <a href="#focus">Focus</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn small" href="#contact">Get in touch</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="card hero-card">
+          <div class="kicker">Quality you can trust • Delivered fast</div>
+          <h1>Better products.<br/>Reliable delivery.<br/>Customer-first service.</h1>
+          <p class="sub">
+            VeonLine is committed to offering high-quality products, fast and dependable shipping,
+            and support you can rely on. We carefully select items from trusted sources so you can shop with confidence.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#contact">Contact us</a>
+            <a class="btn" href="#about">Learn more</a>
+          </div>
+
+          <div class="badges">
+            <span class="badge"><span class="dot"></span> Fast dispatch</span>
+            <span class="badge"><span class="dot"></span> Quality-focused</span>
+            <span class="badge"><span class="dot"></span> Responsive support</span>
+          </div>
+        </div>
+
+        <div class="card side-card">
+          <div class="side-top">
+            <p class="pill">Slogan</p>
+            <p class="side-title">Quality You Can Trust. Delivered Fast.</p>
+            <p class="side-text">A simple promise: great products, quick delivery, and care in every order.</p>
+          </div>
+
+          <div class="grid-3">
+            <div class="mini">
+              <h3>Quality</h3>
+              <p>Selected products from trusted brands & reliable suppliers.</p>
+            </div>
+            <div class="mini">
+              <h3>Speed</h3>
+              <p>Optimized fulfillment and shipping to deliver quickly.</p>
+            </div>
+            <div class="mini">
+              <h3>Care</h3>
+              <p>Clear communication and a customer-first mindset.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS -->
+    <section id="focus">
+      <h2 class="section-title">We are focusing to</h2>
+      <p class="section-sub">
+        At VeonLine, we aim to deliver a seamless and trustworthy shopping experience by prioritizing:
+      </p>
+
+      <div class="features">
+        <div class="card feature">
+          <div class="icon">✓</div>
+          <h3>High-quality products</h3>
+          <p>We carefully select items from trusted sources to ensure authenticity, durability, and value.</p>
+        </div>
+        <div class="card feature">
+          <div class="icon">⚡</div>
+          <h3>Fast & dependable delivery</h3>
+          <p>Efficient fulfillment and optimized logistics enable quick shipping and accurate order handling.</p>
+        </div>
+        <div class="card feature">
+          <div class="icon">❤</div>
+          <h3>Customer care</h3>
+          <p>We build long-term relationships with responsive support, transparency, and a customer-first approach.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-sub">
+        We’re dedicated to providing high-quality products with fast, reliable delivery and exceptional service.
+      </p>
+
+      <div class="about">
+        <div class="card about-card">
+          <h3>Who we are</h3>
+          <p class="muted">
+            VeonLine is a customer-focused company committed to quality, speed, and reliability.
+            We work with trusted brands and dependable suppliers to ensure customers can shop with confidence.
+          </p>
+          <div class="divider"></div>
+          <p class="muted">
+            We continuously improve our operations and product selection based on customer needs and feedback.
+          </p>
+        </div>
+
+        <div class="card about-card">
+          <h3>What you can expect</h3>
+          <ul class="list">
+            <li>Clear product information and transparent policies</li>
+            <li>Fast dispatch and reliable delivery</li>
+            <li>Responsive support and customer care</li>
+            <li>Consistent service you can depend on</li>
+            <li>Quality-first mindset in every order</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact">
+      <div class="card cta">
+        <div>
+          <h2 class="section-title" style="margin:0 0 6px;">Let’s connect</h2>
+          <p class="section-sub" style="margin:0;">
+            Have a question or want to work with us? Reach out and we’ll respond as soon as possible.
+          </p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn primary" href="mailto:info@veonline.com">Email us</a>
+          <a class="btn" href="#top">Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div style="font-weight:900; color:var(--text)">VeonLine</div>
+          <div class="muted">Quality you can trust. Delivered fast.</div>
+        </div>
+        <div class="muted">
+          © <span id="y"></span> VeonLine. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
